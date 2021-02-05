@@ -1,6 +1,5 @@
 import User from "../models/userModel.js";
 import Sale from "../models/saleModel.js";
-import fs from "fs";
 
 const getUsers = async(req, res, next) => {
   if(!req.user.isAdmin) {
@@ -117,19 +116,8 @@ const editUser = async (req, res, next) => {
   if(req.body.password) {
     user.password = req.body.password;
   }
-  
-  if(req.file) {
-    const pathToFile = `../${user.avatar}`;
-
-    fs.unlink(pathToFile, function(err) {
-      if (err) {
-        throw err
-      } else {
-        console.log("Successfully deleted the file.")
-      }
-    })
-
-    user.avatar = `/uploads/avatars/${req.file.filename}`;
+  if(req.body.avatar) {
+    user.avatar = req.body.avatar;
   }
   await user.save();
   res.status(201).json(user);

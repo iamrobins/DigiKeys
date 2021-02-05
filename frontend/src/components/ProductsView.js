@@ -3,6 +3,7 @@ import "./styles.components/ProductsView.css";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import firebase from "firebase";
 
 const ProductsView = ({setSelect, setEditProductId}) => {
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,26 @@ const ProductsView = ({setSelect, setEditProductId}) => {
         }
     }
     fetchProducts();
-  }, [userInfo.name]);
+  }, [userInfo.name, products]);
+
+  const deleteProductHandler = async (product) => {
+    if(product.image.includes("firebase")) {
+      let imgToDel = firebase.storage().refFromURL(product.image)
+      imgToDel.delete().then(() => {
+        console.log("image deleted succesfully")
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+    try {
+      await axios.delete(`api/products/deleteProduct/${product._id}`);
+      setProducts(products.filter(p => p._id !== product._id));
+    }catch(error) {
+      setError(error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message);
+      }
+    }
 
   return (
     <>
@@ -46,7 +66,7 @@ const ProductsView = ({setSelect, setEditProductId}) => {
                   <p>Date: {product.createdAt.substring(0, 10)}</p>
                   <button onClick={e => {setSelect(e.target.textContent); setEditProductId(product)}} type="submit">Edit</button>
                   {/* <Link className="edit-product-btn" to={`/product/edit/${product._id}`}>Edit</Link> */}
-                  <button type="submit">Delete</button>
+                  <button onClick={() => deleteProductHandler(product)}>Delete</button>
                 </form>
               </div>
             ))}

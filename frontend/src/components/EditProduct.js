@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./styles.components/EditProduct.css";
 import {useSelector} from "react-redux";
 import axios from "axios";
+import firebase from "firebase";
 
 const EditProduct = ({editProductId, setSelect}) => {
   const [addProductResponse, setAddProductResponse] = useState(false);
@@ -26,25 +27,49 @@ const EditProduct = ({editProductId, setSelect}) => {
     }
   }, [updateStockResponse, setSelect]);
 
+  const uploadImageToStorage = async () => {
+    let uploadedImgLink = "";
+    
+    //deleting file if not default
+    if(product.image.includes("firebase")) {
+      let imgToDel = firebase.storage().refFromURL(product.image)
+      imgToDel.delete().then(() => {
+        console.log("image deleted succesfully")
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+
+    //uploading file
+    const storageRef = firebase.storage().ref()
+    const fileRef = storageRef.child(`/uploads/products/${image.name}`);
+
+    await fileRef.put(image);
+    uploadedImgLink = await fileRef.getDownloadURL();
+
+    return uploadedImgLink;
+  }
+
   const editProductHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    const updatedDetails = {};
     if(image) {
-      formData.append('image', image);
+      updatedDetails.image = await uploadImageToStorage();
     }
-    formData.append("seller", `${userInfo._id}`);
-    formData.append("name", productName);
-    formData.append("category", category);
-    formData.append("description", description);
-    formData.append("price", price);
+    updatedDetails.seller = userInfo._id;
+    updatedDetails.name = productName;
+    updatedDetails.category = category;
+    updatedDetails.description = description;
+    updatedDetails.price = price;
     
     try {
       const config = {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Authorization": `Bearer ${userInfo.token}`,
+          "Content-Type": "application/json"
         }
       }
-      const {data} = await axios.put(`api/products/editProduct/${product._id}`, formData, config);
+      const {data} = await axios.put(`api/products/editProduct/${product._id}`, updatedDetails, config);
       setProduct(data);
       setAddProductResponse(true);
     }catch(error) {

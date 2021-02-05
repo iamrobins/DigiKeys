@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.components/AddProduct.css";
 import {useSelector} from "react-redux";
 import axios from "axios";
+import firebase from "firebase";
 
 const AddProduct = ({setSelect}) => {
   const [addProductResponse, setAddProductResponse] = useState(false);
@@ -26,23 +27,37 @@ const AddProduct = ({setSelect}) => {
     }
   }, [updateStockResponse, setSelect]);
 
+  const uploadImageToStorage = async () => {
+    let uploadedImgLink = "";
+
+    //uploading file
+    const storageRef = firebase.storage().ref()
+    const fileRef = storageRef.child(`/uploads/products/${image.name}`);
+
+    await fileRef.put(image);
+    uploadedImgLink = await fileRef.getDownloadURL();
+
+    return uploadedImgLink;
+  }
+
   const createProductHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', image)
-    formData.append("seller", `${userInfo._id}`)
-    formData.append("name", productName)
-    formData.append("category", category)
-    formData.append("description", description)
-    formData.append("price", price);
+    const productDetails = {};
+    productDetails.image = await uploadImageToStorage();
+    productDetails.seller = userInfo._id;
+    productDetails.name = productName;
+    productDetails.category = category;
+    productDetails.description = description;
+    productDetails.price = price;
     
     try {
       const config = {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Authorization": `Bearer ${userInfo.token}`,
+          "Content-Type": "application/json"
         }
       }
-      const {data} = await axios.post("api/products/create", formData, config);
+      const {data} = await axios.post("api/products/create", productDetails, config);
       setProduct(data);
       setAddProductResponse(true);
       setProductName("");

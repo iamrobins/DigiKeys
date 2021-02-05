@@ -54,18 +54,16 @@ const displayProducts = async (req, res, next) => {
 }
 
 const createProduct = async (req, res, next) => {
-  const {seller, name, category, description, price } = req.body;
+  const {seller, name, category, description, price, image } = req.body;
   console.log(req.body);
   const product = await Product.create({
     seller,
     name,
-    image: `/uploads/products/${req.file.filename}`,
+    image,
     category,
     description,
     price
-  })
-  // const product = await Product.create({...req.body});
-  console.log(req.body);
+  });
   res.status(201).json(product);
 }
 
@@ -76,20 +74,20 @@ const editProduct = async (req, res, next) => {
   product.category = category;
   product.description = description;
   product.price = price;
-  if(req.file) {
-    const pathToFile = `../${product.image}`;
-
-    fs.unlink(pathToFile, function(err) {
-      if (err) {
-        throw err
-      } else {
-        console.log("Successfully deleted the file.")
-      }
-    })
-    product.image = `/uploads/products/${req.file.filename}`;
+  if(req.body.image) {
+    product.image = req.body.image;
   }
   await product.save();
   res.status(201).json(product);
+}
+
+const deleteProduct = async (req, res, next) => {
+  try {
+    await Product.deleteOne({_id: req.params.productId});
+    res.status(200).json({success: true});
+  } catch(error) {
+    return next(error);
+  }
 }
 
 const updateKeys = async (req, res, next) => {
@@ -100,4 +98,4 @@ const updateKeys = async (req, res, next) => {
   res.status(200).json(product);
 }
 
-export {productDetails ,displayProducts, createProduct, updateKeys, searchProducts, editProduct};
+export {productDetails ,displayProducts, createProduct, updateKeys, searchProducts, editProduct, deleteProduct};

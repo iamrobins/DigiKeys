@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AUTH_LOGIN_SUCCESS} from "../constants/authConstants";
+import firebase from "../firebase";
 
-const ProfileSettings = ({setSelect}) => {
+const ProfileSettings = () => {
   const dispatch = useDispatch();
   const authLogin = useSelector(state => state.authLogin);
   const {userInfo} = authLogin;
@@ -17,32 +18,59 @@ const ProfileSettings = ({setSelect}) => {
   const [editProfileResponse, setEditProfileResponse] = useState("");
   const [warning, setWarning] = useState("");
 
+  const uploadImageToStorage = async () => {
+    let uploadedImgLink = "";
+    
+    //deleting file if not default
+    if(userInfo.avatar.includes("firebase")) {
+      let imgToDel = firebase.storage().refFromURL(userInfo.avatar)
+      imgToDel.delete().then(() => {
+        console.log("image deleted succesfully")
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+
+    //uploading file
+    const storageRef = firebase.storage().ref()
+    const fileRef = storageRef.child(`/uploads/avatars/${image.name}`);
+
+    await fileRef.put(image);
+    uploadedImgLink = await fileRef.getDownloadURL();
+
+    return uploadedImgLink;
+  }
+
   const editProfileHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    const updatedDetails = {};
+
     if(image) {
-      formData.append('image', image);
+      updatedDetails.avatar =  await uploadImageToStorage();
     }
-    formData.append("name", name);
-    formData.append("bio", bio);
-    formData.append("email", email);
+    updatedDetails.name = name;
+    updatedDetails.bio = bio;
+    updatedDetails.email = email;
+
     if(password) {
       if(password !== repeatPassword) {
         setWarning("Password does not match");
         return;
       } else {
         setWarning("");
-        formData.append("password", password);
+        updatedDetails.password = password;
       }
     }
-
     try {
       const config = {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Authorization": `Bearer ${userInfo.token}`,
+          "Content-Type": "application/json"
         }
       }
-      const {data} = await axios.put(`api/users/editUser/${userInfo._id}`, formData, config);
+
+      console.log("just before sending", updatedDetails);
+      const {data} = await axios.put(`api/users/editUser/${userInfo._id}`, updatedDetails, config);
       dispatch({type: AUTH_LOGIN_SUCCESS, payload: data});
       localStorage.setItem("userInfo", JSON.stringify(data));
       setEditProfileResponse(true);
