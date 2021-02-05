@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+:root {
+  --background-primary: rgb(13, 27, 37);
+  --background-secondary: rgb(241, 244, 249);
+  --primary: rgb(164, 208, 55);
+  --primary-hover: rgb(143, 180, 49);
+  --secondary-headings: rgb(17, 24, 39);
+  --secondary-options: rgb(55, 65, 81);
+  --secondary-info-main: rgb(75, 85, 99);
+  --secondary-info-second: rgb(107, 114, 128);
+}
+
+html {
+  background: var(--background-secondary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6rem;
+}
+
+h1,h2,h3,h4,h5,h6, p{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Utility Classes */
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.btn-sm {
+  padding: 0.5rem 1.75rem;
+  margin-left: 1rem;
+  border-radius: 5px;
+}
+
+.btn-m {
+  padding: 0.75rem 1.75rem;
+  border-radius: 5px;
+}
+
+.btn-l {
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  outline: none;
+  border: 1px transparent solid;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-l:hover {
+  background: var(--primary-hover);
+}
+
+.form-input {
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  border: 1px rgb(210, 214, 220) solid;
+  border-radius: 6px;
+}
+
+.footer {
+  color: white;
+  background: var(--background-primary);
+  margin-top: 1rem;
+  text-align: center;
+  padding: 1rem;
+}

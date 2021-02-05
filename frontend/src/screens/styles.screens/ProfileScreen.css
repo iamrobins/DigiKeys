@@ -1,0 +1,59 @@
+.profile-info {
+  background: var(--background-primary);
+  padding-top: 1rem;
+}
+.profile-info a{
+  color: white;
+}
+
+.profile-info__image {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-info__image img {
+  display: block;
+  /* border-radius: 50%; */
+  border-radius: 6px;
+  max-width: 100px;
+}
+
+.profile-info__details {
+  color: white;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.profile-info__name{
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.profile-info__credits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-info__credits p, a{
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.profile-info__credits .fa-star{
+  color: var(--primary);
+}
+
+.profile-info__menu {
+  padding: 0.5rem 0;
+}
+
+.profile-info__menu a{
+  margin: 0 0.2rem;
+  transition: all 0.2s ease;
+}
+
+.profile-info__menu a:hover{
+  border-bottom: 1px solid var(--primary);
+}

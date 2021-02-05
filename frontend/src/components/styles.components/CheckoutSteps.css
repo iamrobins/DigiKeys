@@ -1,0 +1,15 @@
+#checkout-steps {
+  display: flex;
+  /* background: red; */
+  justify-content: center;
+  padding: 2rem;
+}
+
+#checkout-steps div{
+  margin: 0 1rem;
+}
+
+#checkout-steps .active{
+  color: var(--primary);
+  border-bottom: 1px solid grey;
+}

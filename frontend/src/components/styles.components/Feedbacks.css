@@ -1,0 +1,85 @@
+.feedbacks-card {
+  display: flex;
+  background: var(--background-secondary);
+  justify-content: center;
+  margin: 0.5rem 0;
+  justify-content: space-between;
+  border-radius: 6px;
+}
+
+.feedbacks-card a{
+  color: var(--secondary-info-second);
+}
+
+.feedbacks-card p:nth-child(1) {
+  font-size: 2rem;
+  flex: 0;
+  padding: 0 0.5rem;
+}
+
+
+.feedbacks-card p:nth-child(2) {
+  flex: 1;
+  padding-top: 0.2rem;
+}
+
+.feedbacks-card p:nth-child(3) {
+  flex: 10;
+  padding-top: 0.2rem;
+}
+
+.feedbacks-card a {
+  font-size: 1rem;
+}
+
+/* Feedbacks input */
+.feedbacks-input {
+  display: flex;
+  flex: 2;
+  border: 1px rgb(210, 214, 220) solid;
+  border-radius: 6px;
+  background-color: white;
+  margin: 1rem 0;
+  transition: 0.2s all ease-in-out;
+}
+
+.feedbacks-input form{
+  display: flex;
+  flex: 2;
+}
+
+.feedbacks-input .feedbacks-input__comment {
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  /* border: 1px rgb(210, 214, 220) solid; */
+  border: 1px transparent solid;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.feedbacks-input .feedbacks-input__submit {
+  background-color: white;
+  border: none;
+  transition: 0.2s all ease;
+  margin-left: 1rem;
+}
+
+.feedbacks-input .feedbacks-input__submit:hover {
+  color: var(--primary);
+}
+
+.feedbacks-input:hover {
+ border: 2px solid var(--background-secondary);;
+}
+
+.feedbacks-input select {
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
+
+.no-feedbacks {
+  text-align: center;
+  color: var(--primary);
+  margin-top: 5rem;
+}

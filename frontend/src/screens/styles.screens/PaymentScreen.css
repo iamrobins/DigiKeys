@@ -1,0 +1,50 @@
+.payment-screen {
+  height: calc(100vh - 57px);
+  background-color: var(--background-secondary);
+  color: var(--secondary-options);
+}
+
+.payment-screen-main__goBack {
+  background: var(--primary);
+  color: white;
+  border: none;
+  margin-top: 2rem;
+  padding: 0.5rem 1.75rem;
+  border-radius: 5px;
+  transition: 0.2s all ease;
+}
+
+.payment-screen-main__goBack:hover {
+  background: rgb(209, 212, 218);
+}
+
+.payment-screen-method {
+  display: flex;
+  padding-top: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.payment-screen-method h2{
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+.payment-screen-method form{
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-screen-method form button{
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.75rem;
+  margin-top: 1rem;
+  transition: 0.2s all ease;
+}
+
+.payment-screen-method form button:hover{
+  background: rgb(209, 212, 218);
+}

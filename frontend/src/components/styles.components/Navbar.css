@@ -1,0 +1,102 @@
+#navbar {
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-primary);
+}
+
+#navbar a{
+  color: white;
+}
+
+.navbar-main {
+  display: flex;
+  color: white;
+  align-items: center;
+  /* background: red; */
+}
+
+.navbar-main h3{
+  margin: 0;
+}
+
+.navbar-main__logo{
+  width: 10rem;
+}
+
+.navbar-main__logo a{
+  /* background: red; */
+  font-size: 1.2rem;
+}
+
+/* searchbox */
+.navbar-main__search {
+  display: flex;
+  flex: 2;
+  border: 1px rgb(210, 214, 220) solid;
+  border-radius: 6px;
+  background-color: white;
+  transition: 0.2s all ease-in-out;
+}
+
+.navbar-main__search form{
+  display: flex;
+  flex: 2;
+}
+
+.navbar-main__search input {
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  /* border: 1px rgb(210, 214, 220) solid; */
+  border: 1px transparent solid;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.navbar-main__search:hover {
+ border: 2px solid var(--background-secondary);
+}
+
+.navbar-main__search select {
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
+
+.navbar-main__submit {
+  background-color: white;
+  border: none;
+  transition: 0.2s all ease;
+  flex: 1;
+}
+
+.navbar-main__submit:hover {
+  color: var(--primary);
+}
+
+/* Navigation */
+.navbar-main__link{
+  display: flex;
+  justify-content: right;
+  text-align: right;
+}
+
+.navbar-main__link a{
+  padding: 0 1rem;
+}
+
+/* Guest Menu */
+.navbar-main-guest {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbar-main-guest .signin {
+  background: var(--background-primary);
+  border: 1px solid white;
+}
+
+.navbar-main-guest .signup {
+  background: var(--primary);
+}

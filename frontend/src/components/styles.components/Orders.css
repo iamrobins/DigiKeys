@@ -1,0 +1,18 @@
+.user-order-item {
+  display: block;
+}
+
+.user-order-item form{
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.user-order-item form a{
+  padding: 0 0.5rem;
+}
+
+.user-order-item form p{
+  padding: 0;
+  text-align: center;
+}

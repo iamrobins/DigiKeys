@@ -1,0 +1,84 @@
+#products-view {
+  margin: 0 1rem;
+}
+
+#products-view h1{
+  background: white;
+  border-radius: 6px;
+  padding: 1rem 0;
+  color: var(--secondary-options);
+}
+
+.products-view-item form {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  background: white;
+  border-radius: 6px;
+}
+
+.products-view-item form p,
+.products-view-item form a{
+  margin: 0;
+  padding: 0;
+}
+
+.products-view-item form p{
+  flex: 1;
+  text-align: left;
+  padding: 0 1rem;
+  color: var(--secondary-info-second);
+}
+
+.products-view-item form div {
+  width: 5%;
+}
+
+.products-view-item form div a{
+  width: 100%;
+  height: 100%;
+}
+
+.products-view-item form div img{
+  display: block;
+  width: 100%;
+  /* border-radius: 50%; */
+}
+
+.products-view-item form button,
+.products-view-item form .edit-product-btn{
+  background-color: var(--primary);
+  color: white;
+  outline: none;
+  border: 1px solid rgb(216, 213, 213);
+  border-radius: 6px;
+  margin: 0 1rem;
+  transform: all 0.2s ease;
+  padding: 0.5rem 1rem;
+}
+
+.products-view-item form button {
+  padding: 0.5rem 1rem;
+}
+
+.products-view-item form .edit-product-btn{
+  padding: 0.2rem 1rem;
+}
+
+.products-view-item form button:hover,
+.products-view-item form .edit-product-btn:hover{
+  /* border: 2px solid rgb(216, 213, 213); */
+  border: 2px solid white;
+}
+
+.products-view-addproduct-btn a {
+  font-size: 1rem;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.products-view-addproduct-btn a:hover {
+  padding: 0.2rem 0.6rem;
+}

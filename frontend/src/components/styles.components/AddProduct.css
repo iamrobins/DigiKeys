@@ -1,0 +1,58 @@
+#addproduct {
+  margin: 0 1rem;
+  color: var(--secondary-options);
+}
+
+#addproduct h1{
+  background: white;
+  border-radius: 6px;
+  padding: 1rem 0;
+  color: var(--secondary-options);
+}
+
+#addproduct h2{
+  background: white;
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  color: var(--secondary-options);
+}
+
+.addproduct-forms form{
+  display: flex;
+  flex-direction: column;
+  background: white;
+  flex-direction: column;
+  text-align: left;
+  border-radius: 6px;
+  padding: 2rem 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.addproduct-forms img{
+  width: 30%;
+  max-width: 300px;
+}
+
+.addproduct-forms form label {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.addproduct-forms form select{
+  border-radius: 5px;
+  outline: none;
+  padding: 0.2rem;
+}
+
+.addproduct-forms form button {
+  margin-top: 1.5rem;
+}
+
+/* Update Keys Form */
+.addproduct-form__second form h2{
+  padding: 1rem 0;
+}
+
+.addproduct-form__second form input{
+  margin: 0.2rem 0;
+}
