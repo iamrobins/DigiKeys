@@ -18,10 +18,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// const __dirname = path.resolve();
-// app.use("/uploads/products", express.static(path.join(__dirname, "../uploads/products")));
-// app.use("/uploads/avatars", express.static(path.join(__dirname, "../uploads/avatars")));
-
 app.get("/gta", (req, res) => {
   res.json("HEllo GTA ROUTE")
 })
