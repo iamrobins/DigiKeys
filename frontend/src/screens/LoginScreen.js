@@ -5,8 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {login} from "../actions/authActions";
 
 const LoginScreen = ({location, history}) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("guest@guest.com");
+  const [password, setPassword] = useState("123456");
   const dispatch = useDispatch();
   const authLogin = useSelector(state => state.authLogin);
   const {loading, userInfo, error, isLogined} = authLogin;

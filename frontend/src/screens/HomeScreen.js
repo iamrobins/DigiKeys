@@ -26,7 +26,8 @@ const HomeScreen = () => {
             <section className="homescreen-header__info">
               <h2>Sell Serial Keys Online</h2>
               <p>DigiKey is an all-in-one payment processing and e-commerce solution. Accept payments, sell digital keys from your own and more, do it all with a single platform.</p>
-              <li><Link className="btn-m" to="/register">Create Account</Link></li>
+              {/* <li><Link className="btn-m" to="/register">Create Account</Link></li> */}
+              <li><Link className="btn-m" to="/login">Guest Login</Link></li>
             </section>
             <section className="homescreen-header__image">
               {/* <img src="https://shoppy.gg/assets/img/header_image.05280df.svg" alt="header img"/> */}
