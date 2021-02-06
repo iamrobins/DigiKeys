@@ -43,6 +43,9 @@ const ProfileSettings = () => {
 
   const editProfileHandler = async (e) => {
     e.preventDefault();
+    if(warning) {
+      return;
+    }
     const updatedDetails = {};
 
     if(image) {
@@ -69,13 +72,30 @@ const ProfileSettings = () => {
         }
       }
 
-      console.log("just before sending", updatedDetails);
+      // console.log("just before sending", updatedDetails);
       const {data} = await axios.put(`api/users/editUser/${userInfo._id}`, updatedDetails, config);
       dispatch({type: AUTH_LOGIN_SUCCESS, payload: data});
       localStorage.setItem("userInfo", JSON.stringify(data));
       setEditProfileResponse(true);
     }catch(error) {
       setEditProfileResponse(false);
+    }
+  }
+
+  const avatarValidation = (e) => {
+    if(e.target.files[0].type.split("/")[0] === "image") {
+      if(e.target.files[0].size > 2 * 1024 * 1024) {
+        setImage({});
+        setEditProfileResponse(false);
+        setWarning("Please upload an image less than 2MB");
+      } else {
+        setWarning("");
+        setImage(e.target.files[0]);
+      }
+    } else {
+      setImage({});
+      setEditProfileResponse(false);
+      setWarning("Please upload a valid image file");
     }
   }
 
@@ -87,13 +107,13 @@ const ProfileSettings = () => {
             <form onSubmit={editProfileHandler} encType="multipart/form-data">
               <h2>Profile Details</h2>
               {editProfileResponse && <small style={{color: "#a4d037"}}>Profile Successfully Updated</small>}
-              {warning && <small style={{color: "yellow"}}>Password does not match</small>}
+              {warning && <small style={{color: "#9e9900"}}>{warning}</small>}
               <label htmlFor="name">Name</label>
               <input className="form-input" placeholder="Name" type="text" minLength="3" value={name} onChange={e => setName(e.target.value)}/>
 
               <label htmlFor="Image" width="200">Avatar</label>
               <img src={userInfo.avatar} alt={userInfo.name}/>
-              <input className="form-input" type="file" name="file" onChange={e => setImage(e.target.files[0])}></input>
+              <input className="form-input" type="file" name="file" accept="image/*" onChange={avatarValidation}></input>
 
               <label htmlFor="description">Bio</label>
               <input className="form-input" type="text" maxLength="100" value={bio} onChange={e => setBio(e.target.value)}/>

@@ -17,6 +17,7 @@ const AddProduct = ({setSelect}) => {
   const [category, setCategory] = useState("games");
   const [price, setPrice] = useState(1);
   const [description, setDescription] = useState("");
+  const [warning, setWarning] = useState("");
 
   //Related to addKeys
   const [stockCount, setStockCount] = useState(1);
@@ -42,6 +43,9 @@ const AddProduct = ({setSelect}) => {
 
   const createProductHandler = async (e) => {
     e.preventDefault();
+    if(warning) {
+      return;
+    }
     const productDetails = {};
     productDetails.image = await uploadImageToStorage();
     productDetails.seller = userInfo._id;
@@ -88,6 +92,23 @@ const AddProduct = ({setSelect}) => {
     }
   }
 
+  const imageValidation = (e) => {
+    if(e.target.files[0].type.split("/")[0] === "image") {
+      if(e.target.files[0].size > 2 * 1024 * 1024) {
+        setImage({});
+        setAddProductResponse(false);
+        setWarning("Please upload an image less than 2MB");
+      } else {
+        setWarning("");
+        setImage(e.target.files[0]);
+      }
+    } else {
+      setImage({});
+      setAddProductResponse(false);
+      setWarning("Please upload a valid image file");
+    }
+  }
+
   return (
     <>
       <div id="addproduct">
@@ -96,11 +117,12 @@ const AddProduct = ({setSelect}) => {
           <div className="addproduct-form__first">
             <form onSubmit={createProductHandler} encType="multipart/form-data">
               <h2>Product Details</h2>
+              {warning && <small style={{color: "#9e9900"}}>{warning}</small>}
               <label htmlFor="name">Name</label>
               <input className="form-input" placeholder="Product Name" type="text" required minLength="3" value={productName} onChange={e => setProductName(e.target.value)}/>
 
               <label htmlFor="Image">Image</label>
-              <input className="form-input" type="file" name="file" required onChange={e => setImage(e.target.files[0])}></input>
+              <input className="form-input" type="file" name="file" required onChange={imageValidation}></input>
 
               <label htmlFor="category">Category</label>
               <select name="category" value={category} onChange={e => setCategory(e.target.value)}> 
