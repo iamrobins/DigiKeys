@@ -21,7 +21,7 @@ Express/Nodejs (Server), Mongoose/MongoDB (Database), Firebase (Files Sorage)
 <img src="https://i.postimg.cc/fTbhJCBw/digikeys-home.png">
 
 ### Profile
-<img src="https://i.postimg.cc/tqqqZym3/profile.png">
+<img src="https://i.postimg.cc/3w9xsNw1/Screenshot-575.png">
 
 ### Dashboard
 <img src="https://i.postimg.cc/bwW8Xn0q/digikeys-dashboard.png">
