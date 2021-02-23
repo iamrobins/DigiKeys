@@ -12,7 +12,7 @@ Express/Nodejs (Server), Mongoose/MongoDB (Database), Firebase (Files Sorage)
 - Use Your Profile as Store
 - Password Reset via Email and JWT Authentication
 - User Feedbacks
-- Products and Users Search along with Soring and Filtering
+- Products and Users Search along with Sorting and Filtering
 - Paypal Payment Integration, Bitcoin comming soon
 - Virtual Balance
 - Automated Distribution of Products
